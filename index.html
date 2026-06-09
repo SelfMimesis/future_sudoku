@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FUTURE SUDOKU</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-state="loading">
+    <div id="stageWrap" class="stage-wrap">
+      <div id="app" class="app" data-state="loading">
+        <div class="corner-shape corner-shape-a" aria-hidden="true"></div>
+        <div class="corner-shape corner-shape-b" aria-hidden="true"></div>
+        <div class="corner-shape corner-shape-c" aria-hidden="true"></div>
+        <div class="edge-lines edge-lines-left" aria-hidden="true"></div>
+        <div class="edge-lines edge-lines-bottom" aria-hidden="true"></div>
+        <div class="dot-field" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+
+        <header class="brand-panel">
+          <div class="brand-topline">
+            <span class="brand-mark">FS</span>
+            <span id="difficultyLabel">STANDBY</span>
+          </div>
+          <h1>FUTURE<br />SUDOKU</h1>
+          <p id="statusText">SYNCING GRID</p>
+          <div class="mini-icons" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </header>
+
+        <nav class="top-actions" aria-label="Controles superiores">
+          <button class="pause-button" type="button" data-action="pause" aria-label="Pausar">II</button>
+        </nav>
+
+        <main class="play-layout" aria-label="Zona de juego">
+          <section class="board-zone">
+            <div class="board-frame">
+              <div class="board-shell">
+                <div id="board" class="sudoku-board" aria-label="Tablero sudoku"></div>
+              </div>
+            </div>
+            <div class="readout-line">
+              <span id="readoutLeft">MATRIX READY</span>
+              <span id="readoutRight">6X6</span>
+            </div>
+          </section>
+
+          <aside class="right-panel" aria-label="Panel de mando">
+            <div class="hex-stack">
+              <div class="hex-widget">
+                <span>SELECT</span>
+                <strong id="selectedValueLabel">--</strong>
+              </div>
+              <div class="hex-widget hex-widget-soft">
+                <span>HINT / ERR</span>
+                <strong><b id="hintCount">3</b>/<b id="mistakeCount">0</b></strong>
+              </div>
+            </div>
+
+            <div class="side-readouts">
+              <div>
+                <span>CELL</span>
+                <strong id="activeCellLabel">--</strong>
+              </div>
+              <div>
+                <span>REMAIN</span>
+                <strong id="remainingTotal">36</strong>
+              </div>
+            </div>
+
+            <div id="numberRack" class="number-rack" aria-label="Selector de numeros"></div>
+
+            <div class="command-grid">
+              <button type="button" class="command-button accent" data-action="hint">HINT</button>
+              <button type="button" class="command-button" data-action="clear">CLEAR</button>
+              <button type="button" class="command-button" data-action="restart">RESET</button>
+              <button type="button" class="command-button" data-action="settings">SYS</button>
+              <button type="button" class="command-button wide" data-action="menu">MENU</button>
+            </div>
+          </aside>
+        </main>
+
+        <footer class="bottom-hud">
+          <div class="time-block">
+            <span>TIME</span>
+            <strong id="timer">00:00</strong>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <i id="progressFill"></i>
+          </div>
+          <div class="bottom-code">0806 2117 48</div>
+        </footer>
+
+        <section id="screen-loading" class="screen is-visible" aria-live="polite">
+          <div class="screen-panel compact-panel">
+            <div class="scanner-line" aria-hidden="true"></div>
+            <h2>SYNCING GRID</h2>
+            <p>FUTURE SUDOKU</p>
+          </div>
+        </section>
+
+        <section id="screen-menu" class="screen" aria-live="polite" hidden>
+          <div class="screen-panel menu-panel">
+            <div class="screen-kicker">GEOMETRIC LOGIC ENGINE</div>
+            <h2>FUTURE SUDOKU</h2>
+            <div class="difficulty-grid">
+              <button type="button" class="difficulty-card" data-start="signal">
+                <strong>SIGNAL</strong>
+                <span>OPEN MATRIX</span>
+              </button>
+              <button type="button" class="difficulty-card" data-start="vector">
+                <strong>VECTOR</strong>
+                <span>ACTIVE MATRIX</span>
+              </button>
+              <button type="button" class="difficulty-card hot" data-start="nexus">
+                <strong>NEXUS</strong>
+                <span>DENSE MATRIX</span>
+              </button>
+            </div>
+            <button type="button" class="flat-link" data-action="settings">SYSTEM SETTINGS</button>
+          </div>
+        </section>
+
+        <section id="screen-paused" class="screen" aria-live="polite" hidden>
+          <div class="screen-panel compact-panel">
+            <h2>PAUSED</h2>
+            <div class="modal-actions">
+              <button type="button" class="command-button accent" data-action="resume">RESUME</button>
+              <button type="button" class="command-button" data-action="restart">RESET</button>
+              <button type="button" class="command-button" data-action="menu">MENU</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="screen-win" class="screen" aria-live="polite" hidden>
+          <div class="screen-panel compact-panel">
+            <div class="screen-kicker">MATRIX COMPLETE</div>
+            <h2>GRID SOLVED</h2>
+            <div class="win-stats">
+              <span>TIME <strong id="winTime">00:00</strong></span>
+              <span>ERR <strong id="winMistakes">0</strong></span>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="command-button accent" data-action="new-same">AGAIN</button>
+              <button type="button" class="command-button" data-action="menu">MENU</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="screen-settings" class="screen" aria-live="polite" hidden>
+          <div class="screen-panel settings-panel">
+            <div class="screen-kicker">SYSTEM</div>
+            <h2>SETTINGS</h2>
+            <div class="settings-list">
+              <button type="button" class="setting-row" data-setting="highlightPeers" aria-pressed="true">
+                <span>PEER LIGHT</span>
+                <strong>ON</strong>
+              </button>
+              <button type="button" class="setting-row" data-setting="autoCheck" aria-pressed="true">
+                <span>AUTO CHECK</span>
+                <strong>ON</strong>
+              </button>
+              <button type="button" class="setting-row" data-setting="reduceMotion" aria-pressed="false">
+                <span>LOW MOTION</span>
+                <strong>OFF</strong>
+              </button>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="command-button accent" data-action="close-settings">DONE</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
