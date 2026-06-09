@@ -190,6 +190,7 @@ h2,
 .brand-mark,
 .brand-topline span,
 .pause-button,
+.fullscreen-button,
 .cell-value,
 .piece-token strong,
 .hex-widget strong,
@@ -260,6 +261,36 @@ h2,
   margin-top: 8px;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.86);
+}
+
+.fullscreen-button {
+  position: absolute;
+  right: 24px;
+  bottom: 18px;
+  width: 42px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  color: var(--panelGreen);
+  background: var(--whiteTile);
+  border: 3px solid rgba(255, 255, 255, 0.78);
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  box-shadow: 6px 6px 0 rgba(79, 90, 91, 0.15);
+}
+
+.fullscreen-button span {
+  width: 20px;
+  height: 18px;
+  display: block;
+  background:
+    linear-gradient(currentColor, currentColor) left top / 8px 3px no-repeat,
+    linear-gradient(currentColor, currentColor) left top / 3px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) right top / 8px 3px no-repeat,
+    linear-gradient(currentColor, currentColor) right top / 3px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / 8px 3px no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / 3px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / 8px 3px no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / 3px 8px no-repeat;
 }
 
 .mini-icons {
@@ -890,6 +921,7 @@ h2,
 }
 
 .pause-button:hover,
+.fullscreen-button:hover,
 .command-button:hover,
 .difficulty-card:hover,
 .setting-row:hover,

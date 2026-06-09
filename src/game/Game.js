@@ -364,11 +364,46 @@ export class Game {
       clear: () => this.clearSelected(),
       menu: () => this.returnToMenu(),
       settings: () => this.openSettings(),
+      fullscreen: () => this.toggleFullscreen(),
       "close-settings": () => this.closeSettings(),
       "new-same": () => this.startGame(this.difficulty.key),
     };
 
     actions[action]?.();
+  }
+
+  async toggleFullscreen() {
+    const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement;
+
+    try {
+      if (fullscreenElement) {
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+
+        this.statusText = "WINDOW MODE";
+      } else {
+        const target = document.documentElement;
+
+        if (target.requestFullscreen) {
+          await target.requestFullscreen();
+        } else if (target.webkitRequestFullscreen) {
+          target.webkitRequestFullscreen();
+        } else {
+          this.statusText = "FULLSCREEN UNAVAILABLE";
+          this.render();
+          return;
+        }
+
+        this.statusText = "FULLSCREEN MODE";
+      }
+    } catch (error) {
+      this.statusText = "FULLSCREEN BLOCKED";
+    }
+
+    this.render();
   }
 
   toggleSetting(settingName) {
