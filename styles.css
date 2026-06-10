@@ -39,7 +39,7 @@ body {
   place-items: center;
   color: var(--textDark);
   background: #e8e1da;
-  font-family: "Arial Narrow", Arial, sans-serif;
+  font-family: "Automatron", "Arial Narrow", Arial, sans-serif;
   letter-spacing: 0;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -235,6 +235,7 @@ h2,
   align-items: center;
   gap: 12px;
   height: 22px;
+  padding-left: 66px;
   color: rgba(255, 255, 255, 0.9);
   font-size: 13px;
 }
@@ -265,22 +266,23 @@ h2,
 
 .fullscreen-button {
   position: absolute;
-  right: 24px;
-  bottom: 18px;
-  width: 42px;
-  height: 36px;
+  z-index: 8;
+  left: 42px;
+  top: 32px;
+  width: 50px;
+  height: 42px;
   display: grid;
   place-items: center;
-  color: var(--panelGreen);
+  color: var(--textDark);
   background: var(--whiteTile);
-  border: 3px solid rgba(255, 255, 255, 0.78);
-  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-  box-shadow: 6px 6px 0 rgba(79, 90, 91, 0.15);
+  border: 4px solid var(--outline);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  box-shadow: 8px 8px 0 rgba(79, 90, 91, 0.16);
 }
 
 .fullscreen-button span {
-  width: 20px;
-  height: 18px;
+  width: 23px;
+  height: 20px;
   display: block;
   background:
     linear-gradient(currentColor, currentColor) left top / 8px 3px no-repeat,
